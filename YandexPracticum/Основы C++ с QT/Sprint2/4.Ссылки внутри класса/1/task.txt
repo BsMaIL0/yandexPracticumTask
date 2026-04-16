@@ -1,0 +1,37 @@
+Роботогенез
+Вам дан готовый класс Logger, чей метод Log выводит пронумерованные сообщения.
+
+int main() {
+    Logger logger;
+    logger.Log("Go north"s); // Выведет "1> Go north".
+    logger.Log("Fire"s);     // Выведет "2> Fire".
+} 
+Вам дан класс Robot, который может передвигаться, поворачиваться в пространстве и стрелять. Информацию о своих действиях робот выводит в std::cout, используя поле-ссылку на Logger.
+
+class Robot {
+public:
+    void Go();
+    void Turn(Direction direction);
+    void Fire();
+    void Report() const;
+}; 
+Что нужно сделать
+Все методы класса Robot уже написаны, кроме конструктора. Напишите конструктор класса Robot, чтобы робота можно было создать и использовать следующим образом:
+
+int main() {
+    Logger logger;
+    Robot robot{logger};
+
+    robot.Turn(Direction::SOUTH); // Вывод: 1> Turn south
+    robot.Go();                   // Вывод: 2> Go south
+    robot.Turn(Direction::EAST);  // Вывод: 3> Turn east
+    robot.Go();                   // Вывод: 4> Go east
+    robot.Fire();                 // Вывод: 5> Fire
+    robot.Turn(Direction::NORTH); // Вывод: 6> Turn north
+    robot.Go();                   // Вывод: 7> Go north
+    robot.Report();               // Вывод: 8> Walked 3 step(s), ammo: 9, direction: north
+} 
+Ограничения
+Не меняйте методы класса Robot и его поля. В этом задании нужно написать только конструктор класса Robot.
+Как будет тестироваться ваш код
+Тренажёр проверит корректность работы класса Robot. Содержимое функции main будет проигнорировано.

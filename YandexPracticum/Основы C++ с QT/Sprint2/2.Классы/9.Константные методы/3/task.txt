@@ -1,0 +1,63 @@
+Константный телевизор
+Решите ещё одну простую задачу. Её решение понадобится вам в следующей теме.
+Что нужно сделать
+Объявите константными методы класса TV, которые не изменяют состояние телевизора.
+Ограничения
+Проставьте только константность у методов класса TV. Не меняйте ни состав методов, ни их аргументы.
+Юнит-тесты
+Тест 1
+Код
+
+TV tv;
+assert(!tv.IsTurnedOn()); 
+Тест 2
+Код
+
+TV tv;
+assert(!tv.IsTurnedOn());
+tv.TurnOn();
+assert(tv.IsTurnedOn());
+tv.TurnOff();
+assert(!tv.IsTurnedOn()); 
+Тест 3
+Код
+
+TV tv;
+assert(!tv.IsTurnedOn());
+assert(tv.GetCurrentChannel() == 0);
+tv.TurnOn();
+assert(tv.GetCurrentChannel() == 1); 
+Тест 4
+Код
+
+TV tv;
+tv.TurnOn();
+for (auto i = 0; i < 10; ++i) {
+    int channel = (71 * i) % MAX_CHANNEL + 1;
+    assert(tv.SelectChannel(channel));
+    assert(tv.GetCurrentChannel() == channel);
+} 
+Тест 5
+Код
+
+TV tv;
+tv.TurnOff();
+int channel = 345 % MAX_CHANNEL + 1;
+assert(!tv.SelectChannel(channel));
+assert(tv.GetCurrentChannel() == 0); 
+Тест 6
+Код
+
+TV tv;
+tv.TurnOn();
+for (auto i = 0; i < 10; ++i) {
+    int channel = (641 * i) % MAX_CHANNEL + 1;
+    assert(tv.SelectChannel(channel));
+    assert(tv.GetCurrentChannel() == channel);
+    tv.TurnOff();
+    assert(tv.IsTurnedOn());
+    tv.TurnOn();
+    assert(tv.GetCurrentChannel() == channel);
+} 
+Как будет тестироваться код
+Тренажёр проверит, что в классе TV нужные методы объявлены константными. Также проверит работу класса TV.

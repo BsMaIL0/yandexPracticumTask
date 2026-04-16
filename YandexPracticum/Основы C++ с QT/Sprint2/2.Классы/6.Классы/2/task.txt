@@ -1,0 +1,70 @@
+Летят утки 2
+К Тихокряку и Огнекрылу присоединились другие утки. Теперь их целая семья. Точное количество уток и их имена программа узнает из стандартного ввода.
+Что нужно сделать
+Не меняя класс Duck, доработайте main, чтобы он мог обработать произвольное количество уток. Для удобства сложите уток в переменную типа std::vector<Duck>.
+Как будет тестироваться код
+Тренажёр проверит, что программа работает в соответствии с описанием и форматом, описанным ниже.
+Формат ввода-вывода
+Программа читает следующие данные:
+Число int — количество уток (N).
+Имена уток (по одному имени на строке).
+Число int — количество команд.
+Сами команды.
+Каждая команда состоит из двух чисел:
+Число int — номер утки. В отличие от предыдущей задачи, может быть любым числом в пределах количества уток (от 0 и до N - 1).
+Число int — расстояние, которое нужно пролететь утке.
+Для каждой команды вызывается метод Fly нужной утки.
+Примеры
+Пример 1
+Входные данные
+2
+Whisper Quack
+Fire Wing
+3
+0 10
+1 20
+1 2 
+Результат
+Whisper Quack flies 10km. Total flight distance is 10km.
+Fire Wing flies 20km. Total flight distance is 20km.
+Fire Wing flies 2km. Total flight distance is 22km. 
+Пример 2
+Входные данные
+5
+Ducky McDuckface
+Quackbert Duckinson
+Sir Feathersworth
+Duckworth von Quackenstein
+Quackimus Maximus
+15
+4 97
+0 23
+3 50
+1 99
+2 12
+2 87
+3 69
+1 45
+0 82
+3 33
+2 76
+4 61
+1 10
+0 52
+4 88 
+Результат
+Quackimus Maximus flies 97km. Total flight distance is 97km.
+Ducky McDuckface flies 23km. Total flight distance is 23km.
+Duckworth von Quackenstein flies 50km. Total flight distance is 50km.
+Quackbert Duckinson flies 99km. Total flight distance is 99km.
+Sir Feathersworth flies 12km. Total flight distance is 12km.
+Sir Feathersworth flies 87km. Total flight distance is 99km.
+Duckworth von Quackenstein flies 69km. Total flight distance is 119km.
+Quackbert Duckinson flies 45km. Total flight distance is 144km.
+Ducky McDuckface flies 82km. Total flight distance is 105km.
+Duckworth von Quackenstein flies 33km. Total flight distance is 152km.
+Sir Feathersworth flies 76km. Total flight distance is 175km.
+Quackimus Maximus flies 61km. Total flight distance is 158km.
+Quackbert Duckinson flies 10km. Total flight distance is 154km.
+Ducky McDuckface flies 52km. Total flight distance is 157km.
+Quackimus Maximus flies 88km. Total flight distance is 246km. 

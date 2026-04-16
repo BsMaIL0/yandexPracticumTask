@@ -1,0 +1,35 @@
+Что нужно сделать
+Вам дана заготовка классов Address (адрес) и Person (человек).
+В классе Address реализуйте конструктор с сигнатурой:
+
+Address(int zip_code, const std::string& city, const std::string& street,
+        int building, int apartment); 
+В классе Person реализуйте конструктор с сигнатурой:
+
+Person(const std::string& name, const std::string& surname, const Address& address); 
+Ограничения
+В классах Address и Person не объявляйте другие конструкторы, кроме указанных в задании. Для инициализации полей используйте списки инициализации, а не тело конструктора.
+Юнит-тесты
+Тест 1
+
+Address address{101000, "Moscow"s, "The 3rd Stroiteley Street"s, 25, 100};
+assert(ToString(address) == "101000, Moscow, The 3rd Stroiteley Street, 25, 100"s); 
+Тест 2
+
+Address address{123456, "Moscow"s, "Zastava Ilyicha"s, 8, 1};
+assert(ToString(address) == "123456, Moscow, Zastava Ilyicha, 8, 1"s); 
+Тест 3
+
+Person person{
+    "Zhenya"s, "Lukashin"s, {101000, "Moscow"s, "The 3rd Stroiteley Street"s, 25, 100}};
+assert(person.GetName() == "Zhenya"s);
+assert(person.GetSurname() == "Lukashin"s);
+assert(ToString(person.GetAddress()) == "101000, Moscow, The 3rd Stroiteley Street, 25, 100"s); 
+Тест 4
+
+Person person{"Stepan"s, "Stepanov"s, {123456, "Moscow"s, "Zastava Ilyicha"s, 8, 1}};
+assert(person.GetName() == "Stepan"s);
+assert(person.GetSurname() == "Stepanov"s);
+assert(ToString(person.GetAddress()) == "123456, Moscow, Zastava Ilyicha, 8, 1"s); 
+Как будет тестироваться ваш код
+Тренажёр проверит классы Person и Address. Функция main будет проигнорирована.

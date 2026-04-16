@@ -1,0 +1,24 @@
+Что нужно сделать
+К существующей программе добавьте ещё две функции, которые будут использовать ранее написанные функции:
+std::string BookToString(const Book& book) — сериализует книгу в строку, используя функцию WriteBook.
+Book StringToBook(const std::string& str) — десериализует книгу из строки, используя функцию ReadBook.
+В book.h разместите их объявления, а в main.cpp — их реализации.
+Чтобы WriteBook помогла получить строку из объекта Book, нужно передать в неё объект типа std::ostringstream. Затем из него можно получить строку методом str.
+Чтобы в StringToBook получить объект Book из строки, нужно передать строку в конструктор объекта std::istringstream. Затем этот объект передать в функцию ReadBook.
+Ограничения
+Функция BookToString должна использовать WriteBook, передавая в неё std::ostringstream.
+Функция StringToBook должна использовать ReadBook, передавая в неё std::istringstream.
+Юнит-тесты
+Для самопроверки можете использовать такой код:
+
+const Book book1{.title = "White Fang"s, .author = "Jack London"s, .publication_year = 1906};
+const Book book2{.title = "Moby-Dick"s, .author = "Herman Melville"s, .publication_year = 1851};
+
+assert(BookToString(book1) == "White Fang\nJack London\n1906\n"s);
+assert(BookToString(book2) == "Moby-Dick\nHerman Melville\n1851\n");
+
+const Book book1_copy = StringToBook("White Fang\nJack London\n1906\n"s);
+assert(BooksAreEqual(book1, book1_copy));
+
+const Book book2_copy = StringToBook("Moby-Dick\nHerman Melville\n1851\n");
+assert(BooksAreEqual(book2, book2_copy)); 

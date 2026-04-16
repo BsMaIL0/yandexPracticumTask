@@ -1,0 +1,151 @@
+Пульт управления телевизором
+Бывают классы, которые содержат только статические методы. Такие классы позволяют объединить несколько функций, выполняющих похожие действия или действия над одним объектом.
+В заготовке кода дан класс TVControl, который моделирует консольный пульт управления телевизором. Пульт будет читать команды из std::cin и вызывать соответствующие методы класса TV, с которым вы уже работали.
+Каждой команде пульта должен соответствовать статический метод класса TVControl, принимающий ссылку на телевизор. В функции main дан цикл, который обращается к пульту для чтения и выполнения команд.
+Что нужно сделать
+В классе TVControl допишите статический метод ReadAndApplyCommand. Его задача — прочитать команду из std::cin и выполнить её на телевизоре, вызвав соответствующий метод.
+Метод ReadAndApplyCommand должен поддерживать следующие команды:
+Info,
+TurnOn,
+TurnOff,
+SelectChannel,
+Exit.
+Обработка команд Info и Exit уже реализована, вам нужно добавить обработку оставшихся команд. Ниже вы найдёте описание действий команд и их синтаксиса.
+Для каждой команды создайте приватный статический метод. Этот метод должен:
+Вызываться из ReadAndApplyCommand.
+Вызывать соответствующий метод объекта TV.
+Быть реализован в файле tv_control.cpp.
+В методе ReadAndApplyCommand не вызывайте методы телевизора. Вместо этого вызывайте один из вышеперечисленных методов, который будет вызывать команды телевизора.
+Описание команд
+Программа должна поддерживать следующие команды:
+Info. Выводит в std::cout информацию о телевизоре. Если телевизор включён, то выводит строку «TV is turned on. Channel is N», где N — номер канала. Если телевизор выключен, то выводит строку «TV is turned off». Обработка этой команды уже реализована в заготовке.
+TurnOn. Включает телевизор и выводит строку «Turning on».
+TurnOff. Выключает телевизор и выводит строку «TV is turned off».
+SelectChannel {N}, где {N} — номер канала. N должно быть числом. Функция предназначена для выбора указанного канала на телевизоре. В случае успешного выбора выводит строку «Channel selected». Если канал не удалось выбрать из-за того, что телевизор был выключен, выводит строку «TV is not turned on». Если канал не удалось выбрать из-за того, что номер канала выходил за допустимые пределы, то выводит строку «Invalid channel».
+Exit. Завершает диалог с пользователем и выходит из программы. Обработка этой команды реализована в заготовке.
+В задаче не требуется обработка некорректного ввода после команды SelectChannel. Если пользователь введёт что-то иное, кроме числа, программа будет работать неправильно.
+Чтобы остановить программу после неудачной попытки чтения числа, можно воспользоваться функцией assert из библиотеки <cassert>.
+
+int channel;
+assert(std::cin >> channel);
+... 
+Эта защита не обязательна, она не проверяется в тестах, но реализована в авторском решении.
+Ограничения
+В классе TVControl должны быть следующие приватные статические методы:
+TurnOn,
+TurnOff,
+SelectChannel.
+Метод ReadAndApplyCommand не должен вызывать методы телевизора напрямую.
+Не меняйте класс TV и функцию main. Вносите изменения только в класс TVControl.
+Гарантируется, что после команды SelectChannel будет вводиться число.
+Как будет тестироваться код
+Будет проверен только класс TVControl. Класс TV и функция main при проверке будут заменены версиями из заготовки.
+Примеры
+Пример 1
+Входные данные
+Info
+TurnOn
+Info
+SelectChannel 42
+Info
+TurnOff
+Exit 
+Результат
+TV is turned off
+Turning on
+TV is turned on. Channel is 1
+Channel selected
+TV is turned on. Channel is 42
+TV is turned off 
+Пример 2
+Входные данные
+SelectChannel 42
+TurnOn
+SelectChannel 100
+Info
+Exit 
+Результат
+TV is not turned on
+Turning on
+Invalid channel
+TV is turned on. Channel is 1 
+Пример 3
+Входные данные
+Info
+SelectChannel 1
+SelectChannel 1000
+TurnOn
+Info
+Info
+SelectChannel 1
+SelectChannel 1000
+Info
+SelectChannel -10
+Info
+SelectChannel 42
+Info
+SelectChannel 99
+Info
+SelectChannel 100
+Info
+SelectChannel 101
+Info
+SelectChannel 1
+Info
+SelectChannel 0
+Info
+SelectChannel -1
+Info
+SelectChannel -1000
+Info
+SelectChannel 11
+Info
+TurnOff
+SelectChannel 42
+SelectChannel -1
+SelectChannel 101
+Info
+TurnOn
+Info
+SelectChannel 22
+Info
+Exit 
+Результат
+TV is turned off
+TV is not turned on
+TV is not turned on
+Turning on
+TV is turned on. Channel is 1
+TV is turned on. Channel is 1
+Channel selected
+Invalid channel
+TV is turned on. Channel is 1
+Invalid channel
+TV is turned on. Channel is 1
+Channel selected
+TV is turned on. Channel is 42
+Channel selected
+TV is turned on. Channel is 99
+Invalid channel
+TV is turned on. Channel is 99
+Invalid channel
+TV is turned on. Channel is 99
+Channel selected
+TV is turned on. Channel is 1
+Invalid channel
+TV is turned on. Channel is 1
+Invalid channel
+TV is turned on. Channel is 1
+Invalid channel
+TV is turned on. Channel is 1
+Channel selected
+TV is turned on. Channel is 11
+TV is turned off
+TV is not turned on
+TV is not turned on
+TV is not turned on
+TV is turned off
+Turning on
+TV is turned on. Channel is 11
+Channel selected
+TV is turned on. Channel is 22 

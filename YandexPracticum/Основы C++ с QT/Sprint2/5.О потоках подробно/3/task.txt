@@ -1,0 +1,42 @@
+Что нужно сделать
+К существующей программе добавьте ещё две функции, которые так же, как и две предыдущие, будут использовать WriteBook и ReadBook:
+void SaveBookToFile(const std::string& file_name, const Book& book); — сохраняет книгу в текстовый файл, используя функцию WriteBook.
+Book LoadBookFromFile(const std::string& file_name); — читает книгу из текстового файла, используя ReadBook.
+В book.h разместите их объявления, а в main.cpp — их реализации.
+Чтобы WriteBook сохранила в файл объект Book, нужно передать в неё объект типа std::ofstream. При создании объекта в конструктор передаётся путь к файлу.
+Чтобы в LoadBookFromFile могла прочитать объект Book из файла, нужно передать имя файла в конструктор объекта std::ifstream. Затем этот объект передать в функцию ReadBook.
+Ограничения
+Функция SaveBookToFile должна использовать WriteBook, передавая в неё std::ofstream.
+Функция LoadBookFromFile должна использовать ReadBook, передавая в неё std::ifstream.
+Юнит-тесты
+Для самопроверки можете использовать функцию, которая читает содержимое файла и помещает его в std::string:
+
+std::string LoadFile(const std::string& file_name) {
+    std::ifstream ifs(file_name);
+    std::ostringstream oss;
+    oss << ifs.rdbuf();
+    return oss.str();
+} 
+Такой код поместите в функцию main:
+
+using namespace std::literals;
+
+const Book book1{.title = "White Fang"s, .author = "Jack London"s, .publication_year = 1906};
+const Book book2{.title = "Moby-Dick"s, .author = "Herman Melville"s, .publication_year = 1851};
+
+const std::string sample_file1 = "book1.txt";
+const std::string sample_file2 = "book2.txt";
+
+{
+    SaveBookToFile(sample_file1, book1);
+    assert(LoadFile(sample_file1) == "White Fang\nJack London\n1906\n"s);
+
+    SaveBookToFile(sample_file2, book2);
+    assert(LoadFile(sample_file2) == "Moby-Dick\nHerman Melville\n1851\n");
+
+    const Book book1_copy = LoadBookFromFile(sample_file1);
+    assert(BooksAreEqual(book1, book1_copy));
+
+    const Book book2_copy = LoadBookFromFile(sample_file2);
+    assert(BooksAreEqual(book2, book2_copy));
+} 
