@@ -1,0 +1,63 @@
+Что нужно сделать
+В заготовке дан тип вектора using Vector2I = std::pair<int, int> и функция main для операций с входными данными этого типа.
+
+int main() {
+    using namespace std;
+    Vector2I point1;
+    Vector2I point2;
+    char op_sym;
+    int val;
+
+    point1 = Read(cin);
+    std::cin >> op_sym;
+    // Выведем элементы пары.
+    switch (op_sym) {
+    case '+':
+        point2 = Read(cin);
+        // Тут теперь операция сложения пар.
+        Print(std::cout, point1 + point2);
+        break;
+    case '-':
+        point2 = Read(cin);
+        // Тут вычитание.
+        Print(std::cout, point1 - point2);
+        break;
+    case '*':
+        cin >> val;
+        // А тут умножение пары на число.
+        Print(std::cout, point1 * val);
+        break;
+    default:
+        std::cout << "Undefined symbol!" << std::endl;
+    }
+} 
+Реализуйте следующие операции в виде свободных функций для работы с ним:
+
+Vector2I operator+(const Vector2I& vect1, const Vector2I& vect2);
+Vector2I operator-(const Vector2I& vect1, const Vector2I& vect2);
+Vector2I operator*(const Vector2I& vect, int value);
+void Print(std::ostream& str, const Vector2I& vect);
+Vector2I Read(std::istream& str); 
+Примеры
+Пример 1
+Входные данные
+{0,-15} + {1,2} 
+Результат
+{1,-13} 
+Пример 2
+Входные данные
+{0,-15} - {1,2} 
+Результат
+{-1,-17} 
+Пример 3
+Входные данные
+{0,-15} * 2 
+Результат
+{0,-30} 
+Пример 4
+Входные данные
+{0,-15} / 2 
+Результат
+Undefined symbol! 
+
+Подсказка

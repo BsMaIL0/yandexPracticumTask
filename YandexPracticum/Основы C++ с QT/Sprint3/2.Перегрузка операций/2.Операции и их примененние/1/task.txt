@@ -1,0 +1,47 @@
+Что нужно сделать
+В заготовке дан перечислимый тип enum class Weekday. Реализуйте следующие функции для работы с ним:
+
+Weekday Add(Weekday day, int value);
+Weekday Sub(Weekday day, int value);
+void Print(std::ostream& out, Weekday day);
+Weekday Read(std::istream& inp); 
+Функция Read считывает день недели из входного потока inp. Функция Print выводит наименование дня недели в принятый поток out. Функция Add прибавляет заданное количество дней value к текущему day. Функция Sub соответственно отнимает.
+Также в заготовке дана функция main, которая:
+Считывает день недели и два числа — N и M.
+Выводит, какой день будет через N дней.
+Выводит, какой день был M дней назад.
+Ограничения
+Если передан неизвестный день, используйте значение Weekday::UNKNOWN.
+Как будет тестироваться код
+При проверке будет использоваться функция main, данная в заготовке.
+Примеры
+Пример 1
+Входные данные
+Wednesday 1 2 
+Результат
+1 day(s) after it will be Thursday
+2 day(s) before it was Monday 
+Пример 2
+Входные данные
+Tuesday 1 0 
+Результат
+1 day(s) after it will be Wednesday
+0 day(s) before it was Tuesday 
+Пример 3
+Входные данные
+Friday 2 5 
+Результат
+2 day(s) after it will be Sunday
+5 day(s) before it was Sunday 
+Пример 4
+Входные данные
+Friday 0 14 
+Результат
+0 day(s) after it will be Friday
+14 day(s) before it was Friday 
+Пример 5
+Входные данные
+Someday 0 -15 
+Результат
+0 day(s) after it will be Unknown
+-15 day(s) before it was Unknown 
