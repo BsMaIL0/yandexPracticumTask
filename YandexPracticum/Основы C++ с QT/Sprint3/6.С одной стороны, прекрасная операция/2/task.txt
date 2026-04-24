@@ -1,0 +1,84 @@
+В этой задаче мы предлагаем вам переопределить операции инкремента и декремента для удобной работы с днями недели, записанными в enum-перечисление Weekday. Первым днём здесь является воскресенье, а последним — суббота.
+
+enum class Weekday {Sun, Mon, Tue, Wed, Thu, Fri, Sat};
+
+// Sun — воскресенье,
+// Mon — понедельник,
+// Tue — вторник,
+// Wed — среда,
+// Thu — четверг,
+// Fri — пятница,
+// Sat — суббота. 
+Что нужно сделать
+Реализуйте для Weekday перегрузки четырёх операций: инкремента и декремента в префиксной и постфиксной формах. Обратите внимание, что для субботы (Sat), являющейся последним днём недели, следующим будет воскресенье (Sun). Аналогично при использовании декремента для значения Sun мы должны получить Sat. 
+Пример работы операций:
+
+auto day = Weekday::Sat;
+auto new_day = day++;
+
+assert(day == Weekday::Sun);
+assert(new_day == Weekday::Sat); 
+Напомним, что в перечислении class enum элементам автоматически присваиваются номера начиная с нуля. Получить номер элемента можно с помощью оператора static_cast<int>.
+
+int num = static_cast<int>(Weekday::Sun) // Результат = 0. 
+Аналогичным образом можно преобразовать число обратно в объект Weekday.
+
+Weekday day = static_cast<Weekday>(5) // Получаем пятый элемент — Weekday::Fri. 
+Юнит-тесты
+Тест 1
+
+auto day = Weekday::Sun;
+auto new_day = ++day;
+assert(day == Weekday::Mon);
+assert(new_day == Weekday::Mon);
+
+new_day = ++day;
+assert(day == Weekday::Tue);
+assert(new_day == Weekday::Tue);
+
+new_day = day++;
+assert(day == Weekday::Wed);
+assert(new_day == Weekday::Tue);
+
+new_day = day++;
+assert(day == Weekday::Thu);
+assert(new_day == Weekday::Wed);
+
+new_day = --day;
+assert(day == Weekday::Wed);
+assert(new_day == Weekday::Wed);
+
+new_day = --day;
+assert(day == Weekday::Tue);
+assert(new_day == Weekday::Tue);
+
+new_day = day--;
+assert(day == Weekday::Mon);
+assert(new_day == Weekday::Tue);
+
+new_day = day--;
+assert(day == Weekday::Sun);
+assert(new_day == Weekday::Mon); 
+Тест 2
+
+auto day = Weekday::Fri;
+auto new_day = ++day;
+new_day = ++day;
+new_day = ++day;
+assert(day == Weekday::Mon);
+assert(new_day == Weekday::Mon);
+
+new_day = --day;
+new_day = --day;
+assert(day == Weekday::Sat);
+assert(new_day == Weekday::Sat);
+
+new_day = day++;
+new_day = day++;
+assert(day == Weekday::Mon);
+assert(new_day == Weekday::Sun);
+
+new_day = day--;
+new_day = day--;
+assert(day == Weekday::Sat);
+assert(new_day == Weekday::Sun); 
