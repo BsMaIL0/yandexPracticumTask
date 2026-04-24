@@ -1,0 +1,75 @@
+Возвращаемся к нашему классу Rational — самое время добавить возможность сравнивать дроби.
+Что нужно сделать
+Создайте перегрузки шести операций сравнения для Rational в соответствии со стандартом C++20, переопределив только <=> и ==.
+Сравнить дроби можно, перемножив их числители и знаменатели:
+2
+3
+<
+5
+7
+  
+⇔
+  
+2
+  
+∗
+  
+7
+<
+5
+  
+∗
+  
+3
+3
+2
+​
+ < 
+7
+5
+​
+ ⇔2∗7<5∗3
+Если вы сравниваете большие дроби, то произведение из формулы выше может выйти за пределы значений int. Чтобы этого не произошло, преобразуйте одно из перемножаемых чисел к int64_t, воспользовавшись static_cast:
+
+// Может содержать неправильное значение, если a и b — большие:
+int c1 = a * b;
+
+// Всё в порядке, переполнения не происходит:
+std::int64_t c2 = static_cast<std::int64_t>(a) * b;
+
+// Тоже OK, но длиннее:
+std::int64_t c3 = static_cast<std::int64_t>(a) * 
+                  static_cast<std::int64_t>(b); 
+Юнит-тесты
+Тест 1
+
+assert((Rational{2, 5} == Rational{2, 5}));
+assert((Rational{2, 5} == Rational{6, 15}));
+assert((Rational{12, 5} == Rational{12, 5}));
+assert(!(Rational{14, 15} == Rational{13, 15}));
+assert(!(Rational{14, 15} == Rational{14, 3}));
+assert(!(Rational{14, 17} == Rational{13, 1}));
+
+assert((Rational{14, 15} != Rational{13, 15}));
+assert((Rational{14, 15} != Rational{14, 3}));
+assert((Rational{14, 17} != Rational{13, 1}));
+assert(!(Rational{2, 5} != Rational{2, 5}));
+assert(!(Rational{2, 5} != Rational{6, 15}));
+assert(!(Rational{12, 5} != Rational{12, 5}));
+
+assert((Rational{1, 5} < Rational{2, 5}));
+assert((Rational{2, 7} < Rational{2, 6}));
+assert((Rational{11, 17} < Rational{99, 100}));
+assert(!(Rational{2, 5} < Rational{2, 5}));
+assert(!(Rational{4, 5} < Rational{1, 5}));
+assert(!(Rational{99, 5} < Rational{1, 11}));
+
+assert((Rational{1, 5} <= Rational{2, 5}));
+assert((Rational{2, 7} <= Rational{2, 6}));
+assert((Rational{11, 18} <= Rational{99, 100}));
+assert((Rational{2, 5} <= Rational{2, 5}));
+assert(!(Rational{3, 5} <= Rational{1, 5}));
+assert(!(Rational{99, 5} <= Rational{1, 11}));
+
+assert((Rational{3, 5} > Rational{2, 5}));
+assert((Rational{2, 3} > Rational{2, 6}));

@@ -1,0 +1,55 @@
+Класс Interval хранит информацию о диапазоне, заданном двумя числами.
+
+class Interval {
+public:
+    Interval(int start, int end): start_(start), end_(end) {};
+    
+    int GetStart() const { return start_; }
+    int GetEnd() const { return end_; }
+private:
+    int start_, end_;
+}; 
+Что нужно сделать
+Переопределите шесть операций (==, !=, <, >, <=, >=) сравнения для Interval так, чтобы объекты сравнивались по длине интервала. Для этого вам пригодится функция для нахождения модуля числа из библиотеки cmath:
+
+#include <cmath> 
+...
+int a = abs(-27); // a = 27. 
+Выполните задание без использования spaceship, написав собственную перегрузку для каждой операции. Само сравнение интервалов необходимо реализовать в перегрузке операции <, а все остальные операции выразить через неё или те, что уже есть.
+Пример использования перегруженной операции:
+
+Interval interval_1{0, 10};
+Interval interval_2{-1, 14};
+
+if (interval_1 < interval_2) {
+    std::cout << "Первый интервал меньше"s << std::endl;
+} 
+Юнит-тесты
+Тест 1
+
+assert((Interval{0, 10} == Interval{0, 10}));
+assert((Interval{0, 17} == Interval{0, -17}));
+assert(!(Interval{0, 1} == Interval{0, 190}));
+assert(!(Interval{0, 5} == Interval{0, 1}));
+
+assert(!(Interval{0, 10} != Interval{0, 10}));
+assert((Interval{20, 10} != Interval{-30, 1}));
+assert((Interval{60, 10} != Interval{0, 10}));
+
+assert(!(Interval{0, 10} < Interval{0, 10}));
+assert(!(Interval{0, 20} < Interval{0, 10}));
+assert((Interval{1, 10} < Interval{0, -11}));
+
+assert(!(Interval{0, 10} > Interval{0, 10}));
+assert(!(Interval{0, 20} > Interval{0, 33}));
+assert((Interval{0, 627} > Interval{0, -1}));
+
+assert((Interval{33, 10} <= Interval{33, 10}));
+assert((Interval{30, 20} <= Interval{10, 33}));
+assert(!(Interval{0, 42} <= Interval{0, -10}));
+
+assert((Interval{27, 10} >= Interval{27, 10}));
+assert((Interval{70, 50} >= Interval{19, 33}));
+assert(!(Interval{0, 12} >= Interval{0, -13})); 
+Ограничения
+Не используйте операцию spaceship (<=>) в этом задании, перегрузите все операции вручную.

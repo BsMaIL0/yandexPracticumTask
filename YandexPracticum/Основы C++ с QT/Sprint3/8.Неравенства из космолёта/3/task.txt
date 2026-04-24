@@ -1,0 +1,45 @@
+Специфичные правила сравнения отлично подходят в случаях, когда нужно определить, какой из объектов лучше, больше или сильнее. Давайте используем это для игры «камень-ножницы-бумага»!
+Что нужно сделать
+Вам дано перечисление Weapons с тремя возможными вариантами (камень — ROCK, бумага — PAPER, ножницы — SCISSORS). 
+
+enum class Weapons { ROCK, PAPER, SCISSORS }; 
+Создайте для него перегрузку операции < так, чтобы можно было сравнивать два значения и получать true, если второе побеждает первое.
+
+if (Weapons::ROCK < Weapons::PAPER)     { std::cout << "It's true"s; }
+if (Weapons::PAPER < Weapons::SCISSORS) { std::cout << "It's true"s; }
+if (Weapons::SCISSORS < Weapons::ROCK)  { std::cout << "It's true"s; } 
+Во всех остальных случаях операция должна возвращать false.
+В заготовке вам дан класс Game с реализацией игры, которая будет работать с правильно выполненной перегрузкой. 
+Чтобы решить задачу, вам достаточно перегрузить операции в файле weapons.h. Вникать в код самой игры не обязательно.
+Юнит-тесты
+Тест 1
+
+auto weapon_1 = Weapons::ROCK;
+auto weapon_2 = Weapons::ROCK;
+assert(!(weapon_1 < weapon_2));
+assert(!(weapon_2 < weapon_1));
+
+weapon_1 = Weapons::PAPER;
+weapon_2 = Weapons::PAPER;
+assert(!(weapon_1 < weapon_2));
+assert(!(weapon_2 < weapon_1));
+
+weapon_1 = Weapons::SCISSORS;
+weapon_2 = Weapons::SCISSORS;
+assert(!(weapon_1 < weapon_2));
+assert(!(weapon_2 < weapon_1));
+
+weapon_1 = Weapons::ROCK;
+weapon_2 = Weapons::PAPER;
+assert((weapon_1 < weapon_2));
+assert(!(weapon_2 < weapon_1));
+
+weapon_1 = Weapons::ROCK;
+weapon_2 = Weapons::SCISSORS;
+assert(!(weapon_1 < weapon_2));
+assert((weapon_2 < weapon_1));
+
+weapon_1 = Weapons::PAPER;
+weapon_2 = Weapons::SCISSORS;
+assert((weapon_1 < weapon_2));
+assert(!(weapon_2 < weapon_1));
